@@ -1,0 +1,20 @@
+
+upstream nodos {
+	server 192.168.1.73:8000;
+	server 192.168.1.74:8000;
+}
+
+server {
+	listen 80;
+	listen [::]:80;
+
+	server_name 192.168.1.72;
+
+	location / {
+		proxy_pass http://nodos;
+		try_files $uri $uri/ =404;
+	}
+
+}
+
+
